@@ -1,9 +1,9 @@
-title: no style, please! # name of the site
-author: Riccardo Graziosi # name of site's author
-email: riccardo.graziosi97@gmail.com # email of site's author
-url: https://riggraz.dev/no-style-please # root address of the site
+title: /data/local/tmp # name of the site
+author: /data/local/tmp # name of site's author
+email: contact@theappanalyst.com # email of site's author
+url: https://datalocaltmp.github.io # root address of the site
 description: > # description of the site (multiple lines allowed)
-  A (nearly) no-CSS, fast, minimalist Jekyll theme.
+  Random technical write-ups on Android tooling.
 
 permalink: /:slug.html
 
