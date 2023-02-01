@@ -122,3 +122,148 @@ Finally, use the `voltron view <>` following commands to create various views wi
 ![setup](https://github.com/theappanalyst/theappanalyst.github.io/raw/main/_posts/lldb-voltron-setup.png)
 
 ![[https://github.com/theappanalyst/theappanalyst.github.io/raw/main/_posts/lldb-voltron-setup.png]]
+
+---
+
+## Appendix
+
+Apply the patch below to voltron to support aarch64
+
+```
+From 4ed328d44e1269da94ed3b196f38c1cf6a579cea Mon Sep 17 00:00:00 2001
+From: VRC-dev1 <vrc-dev1@VRC-dev1s-MacBook-Pro.local>
+Date: Tue, 31 Jan 2023 20:58:37 -0500
+Subject: [PATCH] adding aarch64 clone of arm64
+
+---
+ voltron/dbg.py                   |  2 +
+ voltron/plugins/view/register.py | 86 ++++++++++++++++++++++++++++++++
+ 2 files changed, 88 insertions(+)
+
+diff --git a/voltron/dbg.py b/voltron/dbg.py
+index 4d92f5b..0ef4b0c 100644
+--- a/voltron/dbg.py
++++ b/voltron/dbg.py
+@@ -98,6 +98,7 @@ class DebuggerAdaptor(object):
+         "armv7":    {"pc": "pc", "sp": "sp"},
+         "armv7s":   {"pc": "pc", "sp": "sp"},
+         "arm64":    {"pc": "pc", "sp": "sp"},
++        "aarch64":    {"pc": "pc", "sp": "sp"},
+         "powerpc":  {"pc": "pc", "sp": "r1"},
+     }
+     cs_archs = {}
+@@ -110,6 +111,7 @@ class DebuggerAdaptor(object):
+             "armv7":    (capstone.CS_ARCH_ARM, capstone.CS_MODE_ARM),
+             "armv7s":   (capstone.CS_ARCH_ARM, capstone.CS_MODE_ARM),
+             "arm64":    (capstone.CS_ARCH_ARM64, capstone.CS_MODE_ARM),
++            "aarch64":    (capstone.CS_ARCH_ARM64, capstone.CS_MODE_ARM),
+             "powerpc":  (capstone.CS_ARCH_PPC, capstone.CS_MODE_32),
+         }
+ 
+diff --git a/voltron/plugins/view/register.py b/voltron/plugins/view/register.py
+index a4a0a4a..720ba2d 100644
+--- a/voltron/plugins/view/register.py
++++ b/voltron/plugins/view/register.py
+@@ -115,6 +115,16 @@ class RegisterView (TerminalView):
+                 'category':         'general',
+             },
+         ],
++        'aarch64': [
++            {
++                'regs':             ['pc', 'sp', 'x0', 'x1', 'x2', 'x3', 'x4', 'x5', 'x6', 'x7', 'x8', 'x9', 'x10',
++                                    'x11', 'x12', 'x13', 'x14', 'x15', 'x16', 'x17', 'x18', 'x19', 'x20',
++                                    'x21', 'x22', 'x23', 'x24', 'x25', 'x26', 'x27', 'x28', 'x29', 'x30'],
++                'label_format':     '{0:3s}',
++                'value_format':     SHORT_ADDR_FORMAT_64,
++                'category':         'general',
++            },
++        ],
+         'powerpc': [
+             {
+                 'regs':             ['pc','msr','cr','lr', 'ctr',
+@@ -313,6 +323,82 @@ class RegisterView (TerminalView):
+             }
+         },
+         'arm64': {
++            'horizontal': {
++                'general': (
++                    "{pcl} {pc}{pcinfo}\n"
++                    "{spl} {sp}{spinfo}\n"
++                    "{x0l} {x0}{x0info}\n"
++                    "{x1l} {x1}{x1info}\n"
++                    "{x2l} {x2}{x2info}\n"
++                    "{x3l} {x3}{x3info}\n"
++                    "{x4l} {x4}{x4info}\n"
++                    "{x5l} {x5}{x5info}\n"
++                    "{x6l} {x6}{x6info}\n"
++                    "{x7l} {x7}{x7info}\n"
++                    "{x8l} {x8}{x8info}\n"
++                    "{x9l} {x9}{x9info}\n"
++                    "{x10l} {x10}{x10info}\n"
++                    "{x11l} {x11}{x11info}\n"
++                    "{x12l} {x12}{x12info}\n"
++                    "{x13l} {x13}{x13info}\n"
++                    "{x14l} {x14}{x14info}\n"
++                    "{x15l} {x15}{x15info}\n"
++                    "{x16l} {x16}{x16info}\n"
++                    "{x17l} {x17}{x17info}\n"
++                    "{x18l} {x18}{x18info}\n"
++                    "{x19l} {x19}{x19info}\n"
++                    "{x20l} {x20}{x20info}\n"
++                    "{x21l} {x21}{x21info}\n"
++                    "{x22l} {x22}{x22info}\n"
++                    "{x23l} {x23}{x23info}\n"
++                    "{x24l} {x24}{x24info}\n"
++                    "{x25l} {x25}{x25info}\n"
++                    "{x26l} {x26}{x26info}\n"
++                    "{x27l} {x27}{x27info}\n"
++                    "{x28l} {x28}{x28info}\n"
++                    "{x29l} {x29}{x29info}\n"
++                    "{x30l} {x30}{x30info}\n"
++                ),
++            },
++            'vertical': {
++                'general': (
++                    "{pcl} {pc}{pcinfo}\n"
++                    "{spl} {sp}{spinfo}\n"
++                    "{x0l} {x0}{x0info}\n"
++                    "{x1l} {x1}{x1info}\n"
++                    "{x2l} {x2}{x2info}\n"
++                    "{x3l} {x3}{x3info}\n"
++                    "{x4l} {x4}{x4info}\n"
++                    "{x5l} {x5}{x5info}\n"
++                    "{x6l} {x6}{x6info}\n"
++                    "{x7l} {x7}{x7info}\n"
++                    "{x8l} {x8}{x8info}\n"
++                    "{x9l} {x9}{x9info}\n"
++                    "{x10l} {x10}{x10info}\n"
++                    "{x11l} {x11}{x11info}\n"
++                    "{x12l} {x12}{x12info}\n"
++                    "{x13l} {x13}{x13info}\n"
++                    "{x14l} {x14}{x14info}\n"
++                    "{x15l} {x15}{x15info}\n"
++                    "{x16l} {x16}{x16info}\n"
++                    "{x17l} {x17}{x17info}\n"
++                    "{x18l} {x18}{x18info}\n"
++                    "{x19l} {x19}{x19info}\n"
++                    "{x20l} {x20}{x20info}\n"
++                    "{x21l} {x21}{x21info}\n"
++                    "{x22l} {x22}{x22info}\n"
++                    "{x23l} {x23}{x23info}\n"
++                    "{x24l} {x24}{x24info}\n"
++                    "{x25l} {x25}{x25info}\n"
++                    "{x26l} {x26}{x26info}\n"
++                    "{x27l} {x27}{x27info}\n"
++                    "{x28l} {x28}{x28info}\n"
++                    "{x29l} {x29}{x29info}\n"
++                    "{x30l} {x30}{x30info}\n"
++                ),
++            },
++        },
++        'aarch64': {
+             'horizontal': {
+                 'general': (
+                     "{pcl} {pc}{pcinfo}\n"
+-- 
+2.32.1 (Apple Git-133)
+```
