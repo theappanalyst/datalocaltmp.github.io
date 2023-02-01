@@ -121,7 +121,6 @@ Finally, use the `voltron view <>` following commands to create various views wi
 
 ![setup](https://github.com/theappanalyst/theappanalyst.github.io/raw/main/_posts/lldb-voltron-setup.png)
 
-![[https://github.com/theappanalyst/theappanalyst.github.io/raw/main/_posts/lldb-voltron-setup.png]]
 
 ---
 
