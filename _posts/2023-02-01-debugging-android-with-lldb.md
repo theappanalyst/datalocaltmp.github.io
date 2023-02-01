@@ -1,6 +1,6 @@
 With the (new?) M1 Macbooks I've been experimenting with conducting security assessments on Apps within Android emulators which benefit from the native Arm architecture. Unfortunately as of Android ndk 24, GDB has been removed and for LLDB instead (changelog [here](https://github.com/android/ndk/wiki/Changelog-r24)) and the M1 Macbook doesn't support gdb all that well yet. 
 
-While I had been getting along just fine with the gdbserver setup described in this fantastic blog written by [Simone Aonzo](https://simoneaonzo.it/) I figure Google is telling me it's time to move on. So what better to do than describe how I replaced gdb/gdbserver/gef with lldb/lldb-server/voltron.
+While I had been getting along just fine with the gdbserver setup described in this fantastic blog written by [Simone Aonzo](https://simoneaonzo.it/gdb-android/) I figure Google is telling me it's time to move on. So what better to do than describe how I replaced gdb/gdbserver/gef with lldb/lldb-server/voltron.
 
 ## Pre-requisites
 * Android emulator with root privledges
