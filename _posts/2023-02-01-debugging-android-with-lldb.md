@@ -119,4 +119,6 @@ Then create a target for lldb, in this instance ziptool, and then run ziptool wi
 
 Finally, use the `voltron view <>` following commands to create various views within your terminal (highly recommend using tmux to get more views for your buck).
 
-![[lldb-voltron-setup.png]]
+![setup](https://github.com/theappanalyst/theappanalyst.github.io/raw/main/_posts/lldb-voltron-setup.png)
+
+![[https://github.com/theappanalyst/theappanalyst.github.io/raw/main/_posts/lldb-voltron-setup.png]]
