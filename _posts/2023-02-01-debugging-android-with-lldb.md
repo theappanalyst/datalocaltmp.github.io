@@ -130,9 +130,6 @@ And that's it, hope this helps with all your LLDB/Android needs!
 Apply the patch below to voltron to support aarch64
 
 ```
-From 4ed328d44e1269da94ed3b196f38c1cf6a579cea Mon Sep 17 00:00:00 2001
-From: VRC-dev1 <vrc-dev1@VRC-dev1s-MacBook-Pro.local>
-Date: Tue, 31 Jan 2023 20:58:37 -0500
 Subject: [PATCH] adding aarch64 clone of arm64
 
 ---
