@@ -117,10 +117,11 @@ Then create a target for lldb, in this instance ziptool, and then run ziptool wi
 (lldb) process launch --stop-at-entry -- zipinfo /data/local/tmp/AdsDynamite.apk
 ```
 
-Finally, use the `voltron view <>` following commands to create various views within your terminal (highly recommend using tmux to get more views for your buck).
+Finally, use the `voltron view {disasm,d,dis,command,c,cmd,registers,r,reg,register,memory,m,mem,stack,s,st,breakpoints,b,bp,break,backtrace,t,bt,back}` command to create various views within your terminal (highly recommend using tmux to get more views for your buck).
 
 ![setup](https://github.com/theappanalyst/theappanalyst.github.io/raw/main/_posts/lldb-voltron-setup.png)
 
+And that's it, hope this helps with all your LLDB/Android needs!
 
 ---
 
